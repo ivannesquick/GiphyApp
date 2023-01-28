@@ -68,8 +68,11 @@ private extension GiphyListViewController {
         fetchBy(category: currentCategory)
     }
     
-    func navigateToDetailVC(with gifUrl: String) {
-        print("Cell tapped")
+    func transitionToDetailScreen(selectedGifURL: String) {
+        let detailGifViewController = DetailGifViewController(currentGifUrl: selectedGifURL)
+        detailGifViewController.modalTransitionStyle = .crossDissolve
+        detailGifViewController.modalPresentationStyle = .overFullScreen
+        present(detailGifViewController, animated: true)
     }
 }
 
@@ -78,7 +81,7 @@ extension GiphyListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case listView.waterfallCollectionView:
-            navigateToDetailVC(with: gifList[indexPath.row].images.original.url)
+            transitionToDetailScreen(selectedGifURL: gifList[indexPath.row].images.original.url)
         case listView.categoryCollectionView:
             if indexPath.row == 0 {
                 fetchBy(category: currentCategory)
