@@ -22,7 +22,6 @@ final class CategoryCell: UICollectionViewCell {
     
     private lazy var roundedView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "mainPurple")
         view.clipsToBounds = true
         view.layer.cornerRadius = 12
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +31,10 @@ final class CategoryCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
+                roundedView.backgroundColor = .purple
                 animateSelection()
+            } else {
+                roundedView.backgroundColor = .black
             }
         }
     }
